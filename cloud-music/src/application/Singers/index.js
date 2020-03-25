@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Singers(props) {
-  return <div>Singers</div>;
+  return <div>singers</div>;
 }
 
 export default React.memo(Singers);
