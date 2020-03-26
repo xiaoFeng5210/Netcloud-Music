@@ -4,7 +4,8 @@ import RecommendList from "../../components/list";
 import Loading from "../../baseUI/loading/index";
 import { connect } from "react-redux";
 import * as actionTypes from "./store/actionCreators";
-// import { Content } from "./style";
+import { Content } from "./style";
+import Scroll from "../../baseUI/scroll";
 
 function Recommend(props) {
   const { bannerList, recommendList, enterLoading } = props;
@@ -25,11 +26,15 @@ function Recommend(props) {
   const recommendListJS = recommendList ? recommendList.toJS() : [];
 
   return (
-    <div>
-      {enterLoading && <Loading />}
-      <Slider bannerList={bannerListJS}></Slider>
-      <RecommendList recommendList={recommendListJS} />
-    </div>
+    <Content>
+      <Scroll>
+        <div>
+          {enterLoading && <Loading />}
+          <Slider bannerList={bannerListJS}></Slider>
+          <RecommendList recommendList={recommendListJS} />
+        </div>
+      </Scroll>
+    </Content>
   );
 }
 
