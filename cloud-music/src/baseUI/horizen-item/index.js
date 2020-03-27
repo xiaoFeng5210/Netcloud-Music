@@ -19,6 +19,10 @@ function Horizen(props) {
     categoryDOM.style.width = `${totalWidth}px`;
   }, []);
 
+  let listItemClick = val => {
+    handleClick(val);
+  };
+
   return (
     <Scroll direction={"horizental"}>
       <div ref={Category}>
@@ -29,7 +33,7 @@ function Horizen(props) {
               <ListItem
                 key={item.key}
                 className={`${oldVal === item.key ? "selected" : ""}`}
-                onClick={() => handleClick(item.key)}
+                onClick={() => listItemClick(item.key)}
               >
                 {item.name}
               </ListItem>
