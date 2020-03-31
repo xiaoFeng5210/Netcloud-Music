@@ -48,6 +48,14 @@ function Singers(props) {
     updateDispatch(category, val);
   };
 
+  const handlePullUp = () => {
+    pullUpRefreshDispatch(category, alpha, category === "", pageCount);
+  };
+
+  const handlePullDown = () => {
+    pullDownRefreshDispatch(category, alpha);
+  };
+
   return (
     <div>
       <NavContainer>
@@ -67,7 +75,12 @@ function Singers(props) {
 
       {/* 列表jsx */}
       <ListContainer>
-        <Scroll>
+        <Scroll
+          pullUp={handlePullUp}
+          pullDown={handlePullDown}
+          pullUpLoading={pullUpLoading}
+          pullDownLoading={pullDownLoading}
+        >
           <List>
             {list.map((item, index) => {
               return (
