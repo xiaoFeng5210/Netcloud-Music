@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Horizen from "../../baseUI/horizen-item";
 import Scroll from "../../baseUI/scroll";
 import { categoryTypes, alphaTypes } from "../../api/utils";
 import { NavContainer, ListContainer, List, ListItem } from "./style";
 import { connect } from "react-redux";
+import { CategoryDataContext, CHANGE_CATEGORY, CHANGE_ALPHA } from "./data";
 import {
   getSingerList,
   getHotSingerList,
@@ -31,20 +32,25 @@ function Singers(props) {
     pullUpRefreshDispatch
   } = props;
 
-  let [category, setCategory] = useState("");
-  let [alpha, setAlpha] = useState("");
+  // let [category, setCategory] = useState("");
+  // let [alpha, setAlpha] = useState("");
   const list = singerList ? singerList.toJS() : [];
 
+  const { data, dispatch } = useContext(CategoryDataContext);
+  const { category, alpha } = data.toJS();
+
   useEffect(() => {
-    getHotSingerDispatch();
+    if (!singerList.size) {
+      getHotSingerDispatch();
+    }
   }, []);
 
   let handleUpdateCategory = val => {
-    setCategory(val);
+    dispatch({ type: CHANGE_CATEGORY, data: val });
     updateDispatch(val, alpha);
   };
   let handleUpdateAlpha = val => {
-    setAlpha(val);
+    dispatch({ type: CHANGE_ALPHA, data: val });
     updateDispatch(category, val);
   };
 
